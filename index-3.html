@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ConecteFácil — Conectando Empresas a Talentos</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --accent: #6c63ff;
+    --accent2: #ff6584;
+    --gold: #f5c842;
+    --text: #f0f0f5;
+    --muted: #7a7a9a;
+    --border: rgba(108,99,255,0.15);
+    --glow: 0 0 40px rgba(108,99,255,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 5vw;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    background: linear-gradient(120deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: #fff;
+    padding: 0.55rem 1.4rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 5vw 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(108,99,255,0.18) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.7; }
+    50% { transform: translate(-50%,-50%) scale(1.15); opacity: 1; }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(108,99,255,0.12);
+    border: 1px solid rgba(108,99,255,0.3);
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    font-size: 0.8rem;
+    color: #9d97ff;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6c63ff; }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(120deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), #9b8fff);
+    color: #fff;
+    padding: 0.85rem 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    box-shadow: var(--glow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(108,99,255,0.5); }
+
+  .btn-secondary {
+    background: var(--surface2);
+    color: var(--text);
+    padding: 0.85rem 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    border: 1px solid var(--border);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-secondary:hover { background: var(--surface); transform: translateY(-2px); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── STATS ── */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    padding: 3rem 5vw;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(120deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 6rem 5vw; }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 500px;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how { background: var(--bg); }
+  .how-header { text-align: center; margin-bottom: 4rem; }
+  .how-header .section-sub { margin: 0 auto; }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .step {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .step:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+  .step-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: rgba(108,99,255,0.15);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .step h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .step p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── CATEGORIES ── */
+  .categories { background: var(--surface); }
+  .cat-header { margin-bottom: 3rem; }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    max-width: 1000px;
+  }
+
+  .cat-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .cat-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .cat-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+  .cat-name { font-size: 0.85rem; font-weight: 500; }
+
+  /* ── FORMS SECTION ── */
+  .forms-section { background: var(--bg); }
+  .forms-section .section-title { text-align: center; margin-bottom: 0.5rem; }
+  .forms-section .section-label { text-align: center; }
+  .forms-section .section-sub { text-align: center; margin: 0 auto 3rem; }
+
+  .forms-tabs {
+    display: flex;
+    gap: 0;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 4px;
+    border: 1px solid var(--border);
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 9px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .tab-btn.active {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .form-panel { display: none; max-width: 700px; margin: 0 auto; }
+  .form-panel.active { display: block; }
+
+  .form-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+  }
+  .form-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .form-card p { font-size: 0.9rem; color: var(--muted); margin-bottom: 2rem; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group.full { grid-column: 1 / -1; }
+
+  label { font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+
+  input, select, textarea {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+  select option { background: var(--surface); }
+  textarea { resize: vertical; min-height: 90px; }
+
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .service-tag {
+    background: rgba(108,99,255,0.1);
+    border: 1px solid rgba(108,99,255,0.3);
+    color: #9d97ff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .service-tag:hover, .service-tag.sel { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .budget-range {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .budget-range input[type=range] {
+    flex: 1;
+    accent-color: var(--accent);
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+  .budget-val {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1rem;
+    min-width: 80px;
+  }
+
+  .submit-btn {
+    width: 100%;
+    margin-top: 1.8rem;
+    background: linear-gradient(135deg, var(--accent), #9b8fff);
+    color: #fff;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--glow);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  /* ── PROFESSIONALS ── */
+  .professionals { background: var(--surface); }
+  .pro-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+
+  .pro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .pro-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .pro-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+  .pro-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+  .pro-avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    flex-shrink: 0;
+  }
+  .pro-info h4 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; }
+  .pro-info span { font-size: 0.8rem; color: var(--muted); }
+
+  .pro-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.72rem;
+    color: #4ade80;
+    background: rgba(74,222,128,0.1);
+    border: 1px solid rgba(74,222,128,0.25);
+    border-radius: 100px;
+    padding: 0.2rem 0.6rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .pro-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+  .pro-skill {
+    font-size: 0.72rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.2rem 0.6rem;
+    color: var(--muted);
+  }
+
+  .pro-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .pro-rate { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; }
+  .pro-rate span { font-size: 0.75rem; font-weight: 400; color: var(--muted); }
+
+  .hire-btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1.1rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .hire-btn:hover { opacity: 0.8; }
+
+  /* ── PRICING ── */
+  .pricing { background: var(--bg); }
+  .pricing .section-title, .pricing .section-label, .pricing .section-sub { text-align: center; }
+  .pricing .section-sub { margin: 0 auto 3.5rem; }
+
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .plan {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative;
+  }
+  .plan:hover { border-color: rgba(108,99,255,0.4); transform: translateY(-4px); }
+
+  .plan.featured {
+    border-color: var(--accent);
+    background: linear-gradient(160deg, rgba(108,99,255,0.08), var(--surface));
+    box-shadow: var(--glow);
+  }
+
+  .plan-badge {
+    position: absolute;
+    top: -12px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.25rem 0.9rem;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .plan-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: var(--muted);
+  }
+
+  .plan-price {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 1rem 0 0.3rem;
+  }
+  .plan-price sup { font-size: 1.3rem; }
+  .plan-period { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.8rem; }
+
+  .plan-features { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
+  .plan-features li { font-size: 0.88rem; display: flex; align-items: center; gap: 0.6rem; }
+  .plan-features li::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+  .plan-btn {
+    width: 100%;
+    padding: 0.85rem;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .plan-btn.outline {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+  }
+  .plan-btn.solid {
+    background: linear-gradient(135deg, var(--accent), #9b8fff);
+    border: none;
+    color: #fff;
+    box-shadow: var(--glow);
+  }
+  .plan-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: linear-gradient(135deg, rgba(108,99,255,0.12), rgba(255,101,132,0.08));
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    padding: 5rem 5vw;
+  }
+  .cta-section .section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+  .cta-section p { color: var(--muted); font-size: 1rem; margin-bottom: 2.5rem; line-height: 1.7; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 3rem 5vw 2rem;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; margin-top: 0.8rem; }
+  .footer-col h5 { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul li a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--text); }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    animation: fadeUp 0.3s ease;
+  }
+  .modal-close {
+    position: absolute;
+    top: 1.2rem; right: 1.2rem;
+    background: none; border: none;
+    color: var(--muted); font-size: 1.5rem;
+    cursor: pointer; line-height: 1;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--text); }
+  .modal h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .modal p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.8rem; }
+
+  .modal-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 2rem 0;
+  }
+  .success-msg .check {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .success-msg h4 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .success-msg p { color: var(--muted); font-size: 0.88rem; }
+
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .form-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .footer-col:first-child { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">ConecteFácil</div>
+  <ul class="nav-links">
+    <li><a href="#como-funciona">Como funciona</a></li>
+    <li><a href="#categorias">Categorias</a></li>
+    <li><a href="#profissionais">Profissionais</a></li>
+    <li><a href="#planos">Planos</a></li>
+  </ul>
+  <a href="#solicitar" class="nav-cta" onclick="openModal()">Solicitar serviço</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-badge"><span class="badge-dot"></span> Profissionais verificados em todo o Brasil</div>
+    <h1>Conectamos sua empresa<br>aos <span>melhores talentos</span></h1>
+    <p>Encontre profissionais qualificados para qualquer área. Contrate com segurança, acompanhe em tempo real e pague só quando estiver satisfeito.</p>
+    <div class="hero-btns">
+      <a href="#solicitar" class="btn-primary" onclick="openModal()">Solicitar serviço agora</a>
+      <a href="#profissionais" class="btn-secondary">Ver profissionais</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">2.400+</div><div class="stat-label">Profissionais cadastrados</div></div>
+  <div class="stat"><div class="stat-num">980+</div><div class="stat-label">Empresas atendidas</div></div>
+  <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Satisfação dos clientes</div></div>
+  <div class="stat"><div class="stat-num">48h</div><div class="stat-label">Tempo médio de contratação</div></div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="como-funciona">
+  <div class="how-header">
+    <div class="section-label">Processo simples</div>
+    <div class="section-title">Como funciona</div>
+    <p class="section-sub">Da solicitação à entrega, cuidamos de tudo para que você foque no que importa.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Descreva sua necessidade</h3>
+      <p>Informe o tipo de serviço, prazo e orçamento disponível. Leva menos de 3 minutos.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Receba propostas</h3>
+      <p>Profissionais qualificados enviam propostas personalizadas em até 24 horas.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Escolha e contrate</h3>
+      <p>Compare perfis, avaliações e preços. Contrate com um clique e pagamento seguro.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h3>Acompanhe e avalie</h3>
+      <p>Monitore o progresso em tempo real e libere o pagamento ao concluir.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categorias">
+  <div class="cat-header">
+    <div class="section-label">Áreas de atuação</div>
+    <div class="section-title">Encontre o especialista<br>certo para você</div>
+  </div>
+  <div class="cat-grid">
+    <a class="cat-card" href="#"><div class="cat-icon">💻</div><div class="cat-name">Tecnologia & TI</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon">📊</div><div class="cat-name">Gestão & Finanças</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon">🎨</div><div class="cat-name">Design & Criativo</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon">📣</div><div class="cat-name">Marketing</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon">⚖️</div><div class="cat-name">Jurídico</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon">🏗️</div><div class="cat-name">Construção & Reforma</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon">🧹</div><div class="cat-name">Limpeza & Conservação</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon">📦</div><div class="cat-name">Logística</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon">👩‍🏫</div><div class="cat-name">Educação & Treinamento</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon">🔧</div><div class="cat-name">Manutenção</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon">📷</div><div class="cat-name">Foto & Vídeo</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon">🤝</div><div class="cat-name">Atendimento</div></a>
+  </div>
+</section>
+
+<!-- FORMS -->
+<section class="forms-section" id="solicitar">
+  <div class="section-label">Cadastro & Solicitação</div>
+  <div class="section-title">Comece agora</div>
+  <p class="section-sub">Você é empresa buscando talentos ou um profissional querendo mais oportunidades?</p>
+
+  <div class="forms-tabs">
+    <button class="tab-btn active" onclick="switchTab('empresa')">🏢 Sou empresa</button>
+    <button class="tab-btn" onclick="switchTab('profissional')">👤 Sou profissional</button>
+    <button class="tab-btn" onclick="switchTab('servico')">📋 Solicitar serviço</button>
+  </div>
+
+  <!-- EMPRESA -->
+  <div class="form-panel active" id="tab-empresa">
+    <div class="form-card">
+      <h3>Cadastrar empresa</h3>
+      <p>Acesse os melhores profissionais do mercado</p>
+      <div class="form-grid">
+        <div class="form-group"><label>Razão Social</label><input type="text" placeholder="Ex: Acme Ltda"></div>
+        <div class="form-group"><label>CNPJ</label><input type="text" placeholder="00.000.000/0001-00"></div>
+        <div class="form-group"><label>Nome do Responsável</label><input type="text" placeholder="Nome completo"></div>
+        <div class="form-group"><label>Cargo</label><input type="text" placeholder="Ex: Diretor de RH"></div>
+        <div class="form-group"><label>E-mail corporativo</label><input type="email" placeholder="nome@empresa.com.br"></div>
+        <div class="form-group"><label>Telefone / WhatsApp</label><input type="tel" placeholder="(11) 99999-9999"></div>
+        <div class="form-group"><label>Setor de atuação</label>
+          <select>
+            <option>Selecione...</option>
+            <option>Tecnologia</option>
+            <option>Saúde</option>
+            <option>Educação</option>
+            <option>Varejo</option>
+            <option>Indústria</option>
+            <option>Serviços</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Porte da empresa</label>
+          <select>
+            <option>Selecione...</option>
+            <option>MEI / Micro</option>
+            <option>Pequena</option>
+            <option>Média</option>
+            <option>Grande</option>
+          </select>
+        </div>
+        <div class="form-group full"><label>Senha</label><input type="password" placeholder="Mínimo 8 caracteres"></div>
+      </div>
+      <button class="submit-btn" onclick="showSuccess()">Criar conta gratuita →</button>
+    </div>
+  </div>
+
+  <!-- PROFISSIONAL -->
+  <div class="form-panel" id="tab-profissional">
+    <div class="form-card">
+      <h3>Cadastrar como profissional</h3>
+      <p>Encontre oportunidades e aumente sua renda</p>
+      <div class="form-grid">
+        <div class="form-group"><label>Nome completo</label><input type="text" placeholder="Seu nome"></div>
+        <div class="form-group"><label>CPF</label><input type="text" placeholder="000.000.000-00"></div>
+        <div class="form-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+        <div class="form-group"><label>WhatsApp</label><input type="tel" placeholder="(11) 99999-9999"></div>
+        <div class="form-group"><label>Área de atuação</label>
+          <select>
+            <option>Selecione...</option>
+            <option>Tecnologia & TI</option>
+            <option>Design & Criativo</option>
+            <option>Marketing</option>
+            <option>Gestão & Finanças</option>
+            <option>Construção & Reforma</option>
+            <option>Limpeza</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Anos de experiência</label>
+          <select>
+            <option>Selecione...</option>
+            <option>Menos de 1 ano</option>
+            <option>1 a 3 anos</option>
+            <option>3 a 5 anos</option>
+            <option>Mais de 5 anos</option>
+          </select>
+        </div>
+        <div class="form-group full"><label>Suas habilidades</label>
+          <div class="service-tags">
+            <span class="service-tag" onclick="this.classList.toggle('sel')">JavaScript</span>
+            <span class="service-tag" onclick="this.classList.toggle('sel')">Design Gráfico</span>
+            <span class="service-tag" onclick="this.classList.toggle('sel')">Excel Avançado</span>
+            <span class="service-tag" onclick="this.classList.toggle('sel')">Elétrica</span>
+            <span class="service-tag" onclick="this.classList.toggle('sel')">Pintura</span>
+            <span class="service-tag" onclick="this.classList.toggle('sel')">Gestão de Projetos</span>
+            <span class="service-tag" onclick="this.classList.toggle('sel')">Atendimento</span>
+            <span class="service-tag" onclick="this.classList.toggle('sel')">Fotografia</span>
+            <span class="service-tag" onclick="this.classList.toggle('sel')">Limpeza</span>
+            <span class="service-tag" onclick="this.classList.toggle('sel')">SEO/Marketing</span>
+          </div>
+        </div>
+        <div class="form-group full"><label>Pretensão de valor por hora (R$)</label>
+          <div class="budget-range">
+            <input type="range" min="20" max="500" value="80" oninput="document.getElementById('proRate').textContent='R$ '+this.value+'/h'">
+            <span class="budget-val" id="proRate">R$ 80/h</span>
+          </div>
+        </div>
+        <div class="form-group full"><label>Senha</label><input type="password" placeholder="Mínimo 8 caracteres"></div>
+      </div>
+      <button class="submit-btn" onclick="showSuccess()">Criar meu perfil gratuitamente →</button>
+    </div>
+  </div>
+
+  <!-- SERVIÇO -->
+  <div class="form-panel" id="tab-servico">
+    <div class="form-card">
+      <h3>Solicitar um serviço</h3>
+      <p>Descreva sua necessidade e receba propostas em até 24h</p>
+      <div class="form-grid">
+        <div class="form-group full"><label>Título do serviço</label><input type="text" placeholder="Ex: Preciso de um desenvolvedor React por 1 mês"></div>
+        <div class="form-group"><label>Categoria</label>
+          <select>
+            <option>Selecione...</option>
+            <option>Tecnologia & TI</option>
+            <option>Design & Criativo</option>
+            <option>Marketing</option>
+            <option>Gestão & Finanças</option>
+            <option>Jurídico</option>
+            <option>Construção & Reforma</option>
+            <option>Limpeza & Conservação</option>
+            <option>Logística</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Prazo estimado</label>
+          <select>
+            <option>Selecione...</option>
+            <option>Urgente (até 24h)</option>
+            <option>Até 1 semana</option>
+            <option>Até 1 mês</option>
+            <option>Mais de 1 mês</option>
+            <option>Contínuo / CLT</option>
+          </select>
+        </div>
+        <div class="form-group full"><label>Descrição detalhada</label>
+          <textarea placeholder="Descreva o que precisa, habilidades necessárias, local de trabalho (presencial/remoto), horários, etc."></textarea>
+        </div>
+        <div class="form-group full"><label>Orçamento disponível (R$)</label>
+          <div class="budget-range">
+            <input type="range" min="100" max="50000" step="100" value="3000" oninput="document.getElementById('budget').textContent='R$ '+parseInt(this.value).toLocaleString('pt-BR')">
+            <span class="budget-val" id="budget">R$ 3.000</span>
+          </div>
+        </div>
+        <div class="form-group"><label>Seu nome</label><input type="text" placeholder="Nome completo"></div>
+        <div class="form-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+        <div class="form-group"><label>WhatsApp</label><input type="tel" placeholder="(11) 99999-9999"></div>
+        <div class="form-group"><label>Cidade</label><input type="text" placeholder="Sua cidade"></div>
+      </div>
+      <button class="submit-btn" onclick="showSuccess()">Enviar solicitação e receber propostas →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROFESSIONALS -->
+<section class="professionals" id="profissionais">
+  <div class="pro-header">
+    <div>
+      <div class="section-label">Destaques</div>
+      <div class="section-title">Profissionais em alta</div>
+    </div>
+    <a href="#" class="btn-secondary">Ver todos</a>
+  </div>
+  <div class="pro-grid">
+
+    <div class="pro-card">
+      <div class="pro-top">
+        <div class="pro-avatar" style="background:linear-gradient(135deg,#6c63ff,#9b8fff);color:#fff">RM</div>
+        <div class="pro-info"><h4>Rafael Mendes</h4><span>São Paulo, SP</span></div>
+      </div>
+      <div class="pro-badge">● Disponível agora</div>
+      <div class="pro-skills">
+        <span class="pro-skill">React</span><span class="pro-skill">Node.js</span><span class="pro-skill">TypeScript</span>
+      </div>
+      <p style="font-size:.84rem;color:var(--muted);line-height:1.6">Desenvolvedor Full Stack com 6 anos de experiência em produtos SaaS e e-commerce de alto tráfego.</p>
+      <div class="pro-footer">
+        <div class="pro-rate">R$ 150<span>/hora</span></div>
+        <button class="hire-btn" onclick="openModal()">Contratar</button>
+      </div>
+    </div>
+
+    <div class="pro-card">
+      <div class="pro-top">
+        <div class="pro-avatar" style="background:linear-gradient(135deg,#ff6584,#ff9a76);color:#fff">CS</div>
+        <div class="pro-info"><h4>Camila Santos</h4><span>Rio de Janeiro, RJ</span></div>
+      </div>
+      <div class="pro-badge">● Disponível agora</div>
+      <div class="pro-skills">
+        <span class="pro-skill">UI/UX</span><span class="pro-skill">Figma</span><span class="pro-skill">Branding</span>
+      </div>
+      <p style="font-size:.84rem;color:var(--muted);line-height:1.6">Designer com portfólio de +80 projetos. Especialista em interfaces digitais e identidade visual de marcas.</p>
+      <div class="pro-footer">
+        <div class="pro-rate">R$ 120<span>/hora</span></div>
+        <button class="hire-btn" onclick="openModal()">Contratar</button>
+      </div>
+    </div>
+
+    <div class="pro-card">
+      <div class="pro-top">
+        <div class="pro-avatar" style="background:linear-gradient(135deg,#f5c842,#ff9a76);color:#fff">JO</div>
+        <div class="pro-info"><h4>João Oliveira</h4><span>Belo Horizonte, MG</span></div>
+      </div>
+      <div class="pro-badge">● Disponível agora</div>
+      <div class="pro-skills">
+        <span class="pro-skill">Marketing Digital</span><span class="pro-skill">Google Ads</span><span class="pro-skill">SEO</span>
+      </div>
+      <p style="font-size:.84rem;color:var(--muted);line-height:1.6">Especialista em performance com foco em ROAS e crescimento orgânico. +R$ 2M em receita gerada.</p>
+      <div class="pro-footer">
+        <div class="pro-rate">R$ 95<span>/hora</span></div>
+        <button class="hire-btn" onclick="openModal()">Contratar</button>
+      </div>
+    </div>
+
+    <div class="pro-card">
+      <div class="pro-top">
+        <div class="pro-avatar" style="background:linear-gradient(135deg,#4ade80,#6c63ff);color:#fff">AL</div>
+        <div class="pro-info"><h4>Ana Lima</h4><span>Curitiba, PR</span></div>
+      </div>
+      <div class="pro-badge">● Disponível agora</div>
+      <div class="pro-skills">
+        <span class="pro-skill">Contabilidade</span><span class="pro-skill">Gestão Fiscal</span><span class="pro-skill">Excel</span>
+      </div>
+      <p style="font-size:.84rem;color:var(--muted);line-height:1.6">Contadora com CRC ativo. Atende PMEs e startups com planejamento tributário e gestão financeira.</p>
+      <div class="pro-footer">
+        <div class="pro-rate">R$ 85<span>/hora</span></div>
+        <button class="hire-btn" onclick="openModal()">Contratar</button>
+      </div>
+    </div>
+
+    <div class="pro-card">
+      <div class="pro-top">
+        <div class="pro-avatar" style="background:linear-gradient(135deg,#38bdf8,#6c63ff);color:#fff">PF</div>
+        <div class="pro-info"><h4>Pedro Ferreira</h4><span>Florianópolis, SC</span></div>
+      </div>
+      <div class="pro-badge">● Disponível agora</div>
+      <div class="pro-skills">
+        <span class="pro-skill">Eletricista</span><span class="pro-skill">SPDA</span><span class="pro-skill">NR10</span>
+      </div>
+      <p style="font-size:.84rem;color:var(--muted);line-height:1.6">Eletricista industrial e predial com certificação NR10. Atende residências, empresas e indústrias.</p>
+      <div class="pro-footer">
+        <div class="pro-rate">R$ 60<span>/hora</span></div>
+        <button class="hire-btn" onclick="openModal()">Contratar</button>
+      </div>
+    </div>
+
+    <div class="pro-card">
+      <div class="pro-top">
+        <div class="pro-avatar" style="background:linear-gradient(135deg,#e879f9,#ff6584);color:#fff">MC</div>
+        <div class="pro-info"><h4>Mariana Costa</h4><span>Campinas, SP</span></div>
+      </div>
+      <div class="pro-badge">● Disponível agora</div>
+      <div class="pro-skills">
+        <span class="pro-skill">RH</span><span class="pro-skill">Recrutamento</span><span class="pro-skill">T&D</span>
+      </div>
+      <p style="font-size:.84rem;color:var(--muted);line-height:1.6">Psicóloga Organizacional e consultora de RH. Processos seletivos, treinamentos e gestão de pessoas.</p>
+      <div class="pro-footer">
+        <div class="pro-rate">R$ 110<span>/hora</span></div>
+        <button class="hire-btn" onclick="openModal()">Contratar</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="planos">
+  <div class="section-label">Planos</div>
+  <div class="section-title">Simples e transparente</div>
+  <p class="section-sub">Escolha o plano ideal para o tamanho da sua operação. Sem surpresas na fatura.</p>
+
+  <div class="plans">
+    <div class="plan">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price"><sup>R$</sup>0</div>
+      <div class="plan-period">Gratuito para começar</div>
+      <ul class="plan-features">
+        <li>Até 3 solicitações/mês</li>
+        <li>Acesso ao catálogo de profissionais</li>
+        <li>Chat com candidatos</li>
+        <li>Pagamento protegido</li>
+      </ul>
+      <button class="plan-btn outline" onclick="switchTab('empresa'); document.getElementById('solicitar').scrollIntoView({behavior:'smooth'})">Começar grátis</button>
+    </div>
+
+    <div class="plan featured">
+      <div class="plan-badge">⚡ Mais popular</div>
+      <div class="plan-name">Business</div>
+      <div class="plan-price"><sup>R$</sup>197</div>
+      <div class="plan-period">por mês</div>
+      <ul class="plan-features">
+        <li>Solicitações ilimitadas</li>
+        <li>Profissionais prioritários</li>
+        <li>Suporte dedicado 24/7</li>
+        <li>Relatórios e dashboards</li>
+        <li>Integração com ERP/RH</li>
+      </ul>
+      <button class="plan-btn solid" onclick="openModal()">Assinar agora</button>
+    </div>
+
+    <div class="plan">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price"><sup>R$</sup>497</div>
+      <div class="plan-period">por mês</div>
+      <ul class="plan-features">
+        <li>Tudo do Business</li>
+        <li>Gestor de conta exclusivo</li>
+        <li>SLA contratual</li>
+        <li>Onboarding personalizado</li>
+        <li>API de integração</li>
+      </ul>
+      <button class="plan-btn outline" onclick="openModal()">Falar com vendas</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-title">Pronto para escalar<br>seu time?</div>
+  <p>Junte-se a centenas de empresas que já contratam mais rápido,<br>com mais qualidade e sem burocracia.</p>
+  <div class="hero-btns">
+    <a href="#" class="btn-primary" onclick="openModal()">Começar agora — é grátis</a>
+    <a href="#como-funciona" class="btn-secondary">Saiba mais</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand footer-col">
+      <div class="logo">ConecteFácil</div>
+      <p>A plataforma que conecta empresas e profissionais qualificados de forma simples, segura e eficiente.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Plataforma</h5>
+      <ul>
+        <li><a href="#">Como funciona</a></li>
+        <li><a href="#">Categorias</a></li>
+        <li><a href="#">Profissionais</a></li>
+        <li><a href="#">Planos</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Empresa</h5>
+      <ul>
+        <li><a href="#">Sobre nós</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Parceiros</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="#">Termos de uso</a></li>
+        <li><a href="#">Privacidade</a></li>
+        <li><a href="#">Cookies</a></li>
+        <li><a href="#">LGPD</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contato</h5>
+      <ul>
+        <li><a href="mailto:contato.conectefacil@gmail.com">📧 contato.conectefacil@gmail.com</a></li>
+        <li><a href="https://wa.me/5564999294611">💬 WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 ConecteFácil. Todos os direitos reservados.</span>
+    <span>📧 contato.conectefacil@gmail.com &nbsp;|&nbsp; Feito no Brasil 🇧🇷</span>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modal-content">
+      <h3>Fale com a nossa equipe</h3>
+      <p>Deixe seus dados e entraremos em contato em até 2 horas úteis.</p>
+      <div class="modal-form">
+        <div class="form-group"><label>Nome</label><input type="text" placeholder="Seu nome completo"></div>
+        <div class="form-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+        <div class="form-group"><label>WhatsApp</label><input type="tel" placeholder="(11) 99999-9999"></div>
+        <div class="form-group"><label>Como podemos ajudar?</label>
+          <select>
+            <option>Quero contratar profissionais</option>
+            <option>Quero me cadastrar como profissional</option>
+            <option>Tenho dúvidas sobre planos</option>
+            <option>Outro assunto</option>
+          </select>
+        </div>
+        <button class="submit-btn" onclick="showModalSuccess()">Enviar →</button>
+      </div>
+    </div>
+    <div class="success-msg" id="success-modal">
+      <div class="check">✅</div>
+      <h4>Mensagem enviada!</h4>
+      <p>Nossa equipe entrará em contato em até 2 horas úteis. Obrigado!</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const WHATSAPP = '5564999294611';
+
+  function sendToWhatsApp(msg) {
+    const url = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
+  }
+
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach((b,i) => {
+      const tabs = ['empresa','profissional','servico'];
+      b.classList.toggle('active', tabs[i] === tab);
+    });
+    document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-'+tab).classList.add('active');
+  }
+
+  function openModal() {
+    event && event.preventDefault();
+    document.getElementById('modal').classList.add('open');
+  }
+  function closeModal() { document.getElementById('modal').classList.remove('open'); }
+  document.getElementById('modal').addEventListener('click', e => { if(e.target === e.currentTarget) closeModal(); });
+
+  function showSuccess() {
+    // Coletar dados do formulário ativo
+    const activePanel = document.querySelector('.form-panel.active');
+    const inputs = activePanel.querySelectorAll('input, select, textarea');
+    const tab = activePanel.id.replace('tab-','');
+
+    let msg = '';
+
+    if (tab === 'empresa') {
+      const razao   = inputs[0].value || '—';
+      const cnpj    = inputs[1].value || '—';
+      const resp    = inputs[2].value || '—';
+      const cargo   = inputs[3].value || '—';
+      const email   = inputs[4].value || '—';
+      const tel     = inputs[5].value || '—';
+      const setor   = inputs[6].value || '—';
+      const porte   = inputs[7].value || '—';
+      msg = `🏢 *NOVO CADASTRO DE EMPRESA*\n\n` +
+            `Razão Social: ${razao}\nCNPJ: ${cnpj}\nResponsável: ${resp}\nCargo: ${cargo}\n` +
+            `E-mail: ${email}\nTelefone: ${tel}\nSetor: ${setor}\nPorte: ${porte}`;
+    } else if (tab === 'profissional') {
+      const nome  = inputs[0].value || '—';
+      const cpf   = inputs[1].value || '—';
+      const email = inputs[2].value || '—';
+      const wpp   = inputs[3].value || '—';
+      const area  = inputs[4].value || '—';
+      const exp   = inputs[5].value || '—';
+      const sels  = [...activePanel.querySelectorAll('.service-tag.sel')].map(t=>t.textContent).join(', ') || '—';
+      const taxa  = document.getElementById('proRate').textContent;
+      msg = `👤 *NOVO PROFISSIONAL CADASTRADO*\n\n` +
+            `Nome: ${nome}\nCPF: ${cpf}\nE-mail: ${email}\nWhatsApp: ${wpp}\n` +
+            `Área: ${area}\nExperiência: ${exp}\nHabilidades: ${sels}\nValor/hora: ${taxa}`;
+    } else if (tab === 'servico') {
+      const titulo = inputs[0].value || '—';
+      const cat    = inputs[1].value || '—';
+      const prazo  = inputs[2].value || '—';
+      const desc   = inputs[3].value || '—';
+      const orcam  = document.getElementById('budget').textContent;
+      const nome   = inputs[5].value || '—';
+      const email  = inputs[6].value || '—';
+      const wpp    = inputs[7].value || '—';
+      const cidade = inputs[8].value || '—';
+      msg = `📋 *NOVA SOLICITAÇÃO DE SERVIÇO*\n\n` +
+            `Título: ${titulo}\nCategoria: ${cat}\nPrazo: ${prazo}\nOrçamento: ${orcam}\n` +
+            `Descrição: ${desc}\n\n*Contato:*\nNome: ${nome}\nE-mail: ${email}\nWhatsApp: ${wpp}\nCidade: ${cidade}`;
+    }
+
+    sendToWhatsApp(msg);
+  }
+
+  function showModalSuccess() {
+    const inputs = document.querySelectorAll('#modal .modal-form input, #modal .modal-form select');
+    const nome   = inputs[0].value || '—';
+    const email  = inputs[1].value || '—';
+    const wpp    = inputs[2].value || '—';
+    const assunto= inputs[3].value || '—';
+    const msg = `💬 *NOVO CONTATO - ConecteFácil*\n\nNome: ${nome}\nE-mail: ${email}\nWhatsApp: ${wpp}\nAssunto: ${assunto}`;
+    sendToWhatsApp(msg);
+    document.getElementById('modal-content').style.display = 'none';
+    document.getElementById('success-modal').style.display = 'block';
+    setTimeout(closeModal, 3000);
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.step, .cat-card, .pro-card, .plan').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
